@@ -19,7 +19,6 @@ public class Main extends Application{
 
     Calculator calc = new Calculator();
 
-    Button broButton;
     Button add;
     Button subtract;
     Button multiply;
@@ -46,10 +45,6 @@ public class Main extends Application{
         //
         Text text = new Text();
         text.setText(calc.inputs);
-
-
-        broButton = new Button("BRO CLICK HERE");
-        broButton.setOnAction(e -> calc.testFun());
 
 
         add = new Button("+");

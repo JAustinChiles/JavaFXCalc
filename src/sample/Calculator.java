@@ -4,10 +4,9 @@ import java.util.Stack;
 
 public class Calculator {
 
-    Stack<Integer> stack = new Stack<Integer>();
     int num = 0;
     String inputs = "";
-    char operation = '+';
+
 
 
     public void add(){
@@ -27,31 +26,41 @@ public class Calculator {
     }
 
     public void equals(){
+
+        Stack<Integer> stack = new Stack<Integer>();
+        char operation = '+';
+
         for(int i = 0; i < inputs.length(); i++){
 
             if (Character.isDigit(inputs.charAt(i))){
-                num = num * 10 + inputs.charAt(i);
+                num = num * 10 + inputs.charAt(i) - '0';
             }
 
-            if (!Character.isDigit((inputs.charAt(i)))){
+            if ((!Character.isDigit(inputs.charAt(i)) && ' ' != inputs.charAt(i))  || i == inputs.length() - 1){
                 if(operation == '-') {
                     stack.push(-num);
+                    num = 0;
                 } else if(operation == '+') {
                     stack.push(num);
+                    num = 0;
                 } else if(operation == '*') {
                     stack.push(stack.pop() * num);
+                    num = 0;
                 } else if(operation == '/') {
                     stack.push(stack.pop() / num);
+                    num = 0;
                 }
+                operation = inputs.charAt(i);
             }
 
-            operation = inputs.charAt(i);
+
+
 
         }
 
         int result = 0;
-        for(int i : stack){
-            result += i;
+        for(int j : stack){
+            result += j;
 
         }
         inputs = String.valueOf(result);
@@ -101,8 +110,4 @@ public class Calculator {
         inputs += "9";
     }
 
-
-    public void testFun(){
-        System.out.println("BREHHHHHHHHHHHHH");
-    }
 }
